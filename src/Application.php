@@ -20,7 +20,7 @@ class Application extends \booosta\base\Base
     $encdata = $this->prepare_data($data, $rawdata);
 
     #\booosta\debug("$this->url$uri"); \booosta\debug($encdata);
-    $rest = $this->makeInstance('\\booosta\\rest\\rest', "$this->url$uri", $encdata, 'POST');
+    $rest = $this->makeInstance('\\booosta\\rest\\Rest', "$this->url$uri", $encdata, 'POST');
     $rest->set_headers($headers);
     if($this->username) $rest->set_credentials($this->username, $this->password);
     $result = $rest();
@@ -36,7 +36,7 @@ class Application extends \booosta\base\Base
     $encdata = $this->prepare_data($data, $rawdata);
 
     #\booosta\debug(json_encode($data));
-    $rest = $this->makeInstance('\\booosta\\rest\\rest', "$this->url$uri", $encdata, 'PUT');
+    $rest = $this->makeInstance('\\booosta\\rest\\Rest', "$this->url$uri", $encdata, 'PUT');
     $rest->set_headers($headers);
     if($this->username) $rest->set_credentials($this->username, $this->password);
     $result = $rest();
@@ -54,7 +54,7 @@ class Application extends \booosta\base\Base
   {
     $headers = $this->headers;
 
-    $rest = $this->makeInstance('\\booosta\\rest\\rest', $url, null, 'GET');
+    $rest = $this->makeInstance('\\booosta\\rest\\Rest', $url, null, 'GET');
     $rest->set_headers($headers);
     if($this->username) $rest->set_credentials($this->username, $this->password);
     $result = $rest();
@@ -67,7 +67,7 @@ class Application extends \booosta\base\Base
   {
     $headers = $this->headers;
 
-    $rest = $this->makeInstance('\\booosta\\rest\\rest', "$this->url$uri", null, 'DELETE');
+    $rest = $this->makeInstance('\\booosta\\rest\\Rest', "$this->url$uri", null, 'DELETE');
     $rest->set_headers($headers);
     if($this->username) $rest->set_credentials($this->username, $this->password);
     $result = $rest();

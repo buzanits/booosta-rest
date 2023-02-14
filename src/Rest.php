@@ -75,8 +75,8 @@ class Rest extends \booosta\base\Module
     $result = curl_exec($curl);
     #\booosta\debug($result);
     #\booosta\debug(curl_getinfo($curl));
-    $statuscode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-    if($statuscode != '200') $this->error = "statuscode $statuscode: $result";
+    $statuscode = intval(curl_getinfo($curl, CURLINFO_HTTP_CODE));
+    if($statuscode < 200 || $statuscode > 299) $this->error = "statuscode $statuscode: $result";
 
     curl_close($curl);
 
