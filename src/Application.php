@@ -1,6 +1,8 @@
 <?php
 namespace booosta\rest;
 
+use \booosta\Framework as b;
+
 class Application extends \booosta\base\Base
 {
   protected $url;
@@ -17,9 +19,11 @@ class Application extends \booosta\base\Base
   protected function post($uri, $data, $rawdata = false)
   {
     $headers = $this->headers;
+    if(!$rawdata) $headers['Content-Type'] = 'application/json';
+
     $encdata = $this->prepare_data($data, $rawdata);
 
-    #\booosta\debug("$this->url$uri"); \booosta\debug($encdata);
+    #b::debug("$this->url$uri"); b::debug($encdata);
     $rest = $this->makeInstance('\\booosta\\rest\\Rest', "$this->url$uri", $encdata, 'POST');
     $rest->set_headers($headers);
     if($this->username) $rest->set_credentials($this->username, $this->password);
